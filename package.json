@@ -21,14 +21,15 @@
   "homepage": "https://github.com/panchalswati/myFlix-movie-app#readme",
   "dependencies": {
     "body-parser": "^1.20.0",
+    "express": "^4.18.1",
     "lodash": "^4.17.21",
-    "npm": "^8.10.0",
-    "nvm": "^0.0.4",
+    "morgan": "^1.10.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
     "eslint": "^8.15.0",
-    "express": "^4.18.1",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "npm": "^8.10.0",
+    "nvm": "^0.0.4"
   }
 }
