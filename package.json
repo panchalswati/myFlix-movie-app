@@ -1,0 +1,34 @@
+{
+  "name": "movie_api",
+  "version": "1.0.0",
+  "description": "myFlix-movie-api\r To build the server-side component of a �movies� web application. \r The web application will provide users with access to information about different movies, directors, and genres. \r Users will be able to sign up, update their personal information, and create a list of their favorite movies",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/panchalswati/myFlix-movie-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/panchalswati/myFlix-movie-app/issues"
+  },
+  "homepage": "https://github.com/panchalswati/myFlix-movie-app#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "lodash": "^4.17.21",
+    "npm": "^8.10.0",
+    "nvm": "^0.0.4",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
+  }
+}
