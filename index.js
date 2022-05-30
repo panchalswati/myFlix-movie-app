@@ -1,25 +1,28 @@
 const express = require('express'),
+    app = express(),
     bodyParser = require('body-parser'),
-    morgan = require('morgan'),
-    Movies = require('./routes/Movies'),
-    Users = require('./routes/Users');
+    morgan = require('morgan');
 
-let app = express();
-app.use(bodyParser.json());
+const mongoose = require('mongoose');
+
+const MoviesRoutes = require('./routes/Movies');
+const UsersRoutes = require('./routes/Users');
+
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.use('/movies', Movies);
+app.use('/movies', MoviesRoutes);
 
-app.use('/users', Users);
-app.get('/', (req, res) => {
+app.use('/users', UsersRoutes);
+
+app.get('/', (req, res, next) => {
     res.send("Welcome to myFlix Movie App!");
+    next();
 });
-//Morgan middleware library to log all requests
-//const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), { flags: 'a' })
-//app.use(morgan('combined', { stream: accessLogStream }));
-
 //serving static files
 app.use(express.static('public'));
 
