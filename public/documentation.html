@@ -51,6 +51,7 @@
             "Name": "Drama",<br>
             "Description": "The film portrays the man's unique way of dealing with his new, torturous life"<br>
             }<br>
+            "Title":"The Matrix"
           </td>
         </tr>
         <tr>
@@ -92,59 +93,72 @@
             data about the user to
             add, structured like:<br>
             {<br>
-            name : "Jack",<br>
-            favoriteMovies=[]<br>
+            "name" : "Jack",<br>
+            "password" : 2345,<br>
+            "email" : "jack@gmail.com"<br>
+            "Birthdate": "1998-06-03"<br>
+            "favoriteMovies":[]<br>
             }
           </td>
           <td>A JSON object holding data
             about the user that was
             added, including an ID:Example<br>
             {<br>
-            id:3,<br>
-            name : "Jack",<br>
-            favouriteMovies=[]<br>
+            "id":3,<br>
+            "name" : "Jack",<br>
+            "password" : 2345,<br>
+            "email" : "jack@gmail.com"<br>
+            "Birthdate": "1998-06-03"<br>
+            "favoriteMovies":[]<br>
             }<br>
           </td>
         </tr>
         <tr>
           <th scope="row">6</th>
           <td>update user name</td>
-          <td>/users/[id]</td>
+          <td>/users/[name]</td>
           <td>PUT</td>
           <td>A JSON object holding data to update. Example<br>
             {<br>
-            "name":"swati updated"<br>
+            "name":"swati"<br>
+            "password" : 2349,<br>
+            "email" : "swati@gmail.com"<br>
+            "Birthdate": "1998-06-02"<br>
             }<br>
           </td>
           <td>A JSON object holding the updated user Example:<br>
             {<br>
             "id": "2",<br>
-            "name": "swati updated"<br>
-            "favouriteMovies": [<br>
-            "City of God"<br>
-            ]<br>
+            "name":"swati"<br>
+            "password" : 2349,<br>
+            "email" : "swati@gmail.com"<br>
+            "Birthdate": "1998-06-02"<br>
             }<br>
           </td>
         </tr>
         <tr>
           <th scope="row">7</th>
           <td>Add movie to favorites list of user</td>
-          <td>/users/[id]/[movieTitle]</td>
+          <td>[users]/[name]/[movies]/[MovieID]</td>
           <td>POST</td>
           <td>None</td>
-          <td>A text message indicating
-            whether the movie is added
-            successfully</td>
+          <td></td>
         </tr>
         <tr>
           <th scope="row">8</th>
           <td>Remove a movie from list of favourites</td>
-          <td>/users/[id]/[movieTitle]</td>
+          <td>/users/[name]/[movies]/[movieID]</td>
           <td>DELETE</td>
           <td>None</td>
-          <td>A text message indicating
-            whether the movie was
-            successfully removed</td>
+          <td>A JSON object holding updated user<br>
+            "_id": "6294b3ac94326ea059c642c5",<br>
+            "name": "sagar",<br>
+            "password": 7865,<br>
+            "email": "sagarpanchal@yahoo.com",<br>
+            "Birthdate": "1995-05-02T00:00:00.000Z",<br>
+            "favoriteMovies": []<br>
+
+          </td>
         </tr>
         <tr>
           <th scope="row">9</th>
@@ -153,7 +167,7 @@
           <td>DELETE</td>
           <td>None</td>
           <td>A text message indicating
-            user email has been successfully removed</td>
+            user has been successfully removed</td>
         </tr>
       </tbody>
     </table>
