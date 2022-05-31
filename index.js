@@ -1,19 +1,22 @@
 const express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
-    morgan = require('morgan');
+    morgan = require('morgan'),
+    mongoose = require('mongoose'),
 
-const mongoose = require('mongoose');
-
-const MoviesRoutes = require('./routes/Movies');
-const UsersRoutes = require('./routes/Users');
-
-mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
-
+    MoviesRoutes = require('./movies/Movies.route.js'),
+    UsersRoutes = require('./users/Users.route.js');
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
+
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use('/movies', MoviesRoutes);
 
