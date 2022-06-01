@@ -3,9 +3,13 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     morgan = require('morgan'),
     mongoose = require('mongoose'),
+    cors = require('cors');
+app.use(cors());
 
-    MoviesRoutes = require('./movies/Movies.route.js'),
-    UsersRoutes = require('./users/Users.route.js');
+const port = process.env.PORT || 8080;
+
+MoviesRoutes = require('./movies/Movies.route.js');
+UsersRoutes = require('./users/Users.route.js');
 app.use(express.json());
 app.use(morgan('dev'));
 
@@ -15,6 +19,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
+
+const { check, validationResult } = require('express-validator');
 
 mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -35,4 +41,6 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-app.listen(8080, () => console.log("app is listening on port 8080"));
+app.listen(port, '0.0.0.0', () => {
+    console.log('Listening on Port ' + port);
+});
