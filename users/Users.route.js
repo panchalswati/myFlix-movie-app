@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const { check, validationResult } = require('express-validator');
 
 const User = require('./user.model');
+const passport = require('passport');
 
 //read all users
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
