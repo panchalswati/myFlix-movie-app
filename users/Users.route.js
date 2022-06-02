@@ -7,7 +7,7 @@ const User = require('./user.model');
 const passport = require('passport');
 
 //read all users
-router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/', (req, res) => {
     User.find()
         .then((user) => {
             res.status(200).json(user);
@@ -56,7 +56,7 @@ router.post('/', [
     })
 
 //read user by name
-router.get('/:name', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/:name', (req, res) => {
     User.findOne({ name: req.params.name })
         .then((user) => {
             res.json(user);
@@ -103,7 +103,7 @@ router.put('/:name', [
     });
 
 //insert movie to user's favorite Movies list
-router.post('/:name/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/:name/movies/:MovieID', (req, res) => {
     User.findOneAndUpdate({ name: req.params.name }, {
         $push: { favoriteMovies: req.params.MovieID }
     },
@@ -118,7 +118,7 @@ router.post('/:name/movies/:MovieID', passport.authenticate('jwt', { session: fa
         });
 });
 
-router.delete('/:name/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.delete('/:name/movies/:MovieID', (req, res) => {
     User.findOneAndUpdate({ name: req.params.name }, {
         $pull: { favoriteMovies: req.params.MovieID }
     },
@@ -134,7 +134,7 @@ router.delete('/:name/movies/:MovieID', passport.authenticate('jwt', { session: 
 });
 
 //delete - deregister user by name
-router.delete('/:name', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.delete('/:name', (req, res) => {
     User.findOneAndRemove({ name: req.params.name })
         .then((user) => {
             if (!user) {

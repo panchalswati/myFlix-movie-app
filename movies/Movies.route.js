@@ -16,7 +16,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 });
 
 //read movie by title
-router.get('/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/:Title', (req, res) => {
     Movie.findOne({ Title: req.params.Title })
         .then((movie) => {
             res.status(200).json(movie);
@@ -27,7 +27,7 @@ router.get('/:Title', passport.authenticate('jwt', { session: false }), (req, re
 });
 
 //read genre by name
-router.get('/genre/:genreName', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/genre/:genreName', (req, res) => {
     Movie.findOne({ 'Genre.Name': req.params.genreName })
         .then((movie) => {
             res.status(200).json(movie.Genre);
@@ -37,7 +37,7 @@ router.get('/genre/:genreName', passport.authenticate('jwt', { session: false })
         });
 });
 //read director details by name
-router.get('/directors/:directorName', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/directors/:directorName', (req, res) => {
     Movie.findOne({ 'Director.name': req.params.directorName })
         .then((movie) => {
             res.status(200).json(movie.Director);
