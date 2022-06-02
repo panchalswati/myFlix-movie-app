@@ -1,10 +1,10 @@
 const express = require('express'),
-    app = express(),
-    bodyParser = require('body-parser'),
-    morgan = require('morgan'),
-    mongoose = require('mongoose'),
-    MoviesRoutes = require('./movies/Movies.route.js'),
-    UsersRoutes = require('./users/Users.route.js');
+  app = express(),
+  bodyParser = require('body-parser'),
+  morgan = require('morgan'),
+  mongoose = require('mongoose'),
+  MoviesRoutes = require('./movies/Movies.route.js'),
+  UsersRoutes = require('./users/Users.route.js');
 app.use(express.json());
 app.use(morgan('dev'));
 const { check, validationResult } = require('express-validator');
@@ -17,10 +17,10 @@ let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 
 app.use(cors({
   origin: (origin, callback) => {
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) { // If a specific origin isn’t found on the list of allowed origins
       let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
-      return callback(new Error(message ), false);
+      return callback(new Error(message), false);
     }
     return callback(null, true);
   }
@@ -35,17 +35,17 @@ app.use('/movies', MoviesRoutes);
 app.use('/users', UsersRoutes);
 
 app.get('/', (req, res, next) => {
-    res.send("Welcome to myFlix Movie App!");
-    next();
+  res.send("Welcome to myFlix Movie App!");
+  next();
 });
 //serving static files
 app.use(express.static('public'));
 //error-handling middleware library
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
 const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0', () => {
-    console.log('Listening on Port ' + port);
+  console.log('Listening on Port ' + port);
 });
