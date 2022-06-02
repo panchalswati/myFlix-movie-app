@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Movie = require('./movie.model');
 const passport = require('passport');
-
+require('./passport');
 //read all movies
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movie.find()
