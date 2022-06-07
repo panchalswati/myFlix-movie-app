@@ -1,5 +1,7 @@
 const express = require('express'),
   app = express(),
+  path = require('path'),
+  fs = require('fs'),
   bodyParser = require('body-parser'),
   morgan = require('morgan'),
   mongoose = require('mongoose'),
@@ -28,7 +30,7 @@ app.use(cors({
 
 let auth = require('./auth')(app);
 const passport = require('passport');
-require('./passport');
+require('./localPassport');
 //mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 app.use('/movies', MoviesRoutes);
@@ -39,7 +41,10 @@ app.get('/', (req, res, next) => {
   next();
 });
 //serving static files
-app.use(express.static('public'));
+//app.use(express.static('public'));
+app.get('/docs', function (req, res) {
+  res.sendFile(path.join(__dirname + '/public/documentation.html'));
+})
 //error-handling middleware library
 app.use((err, req, res, next) => {
   console.error(err.stack);
