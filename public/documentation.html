@@ -16,6 +16,9 @@
       This web application will provide access to information about different movies, directors, and genres.
       Users will be able to sign up,update their personal information, and create a list of their favorite movies.
     </p>
+    <p>All user's endpoints- don't require any authentication and authorization by HTTP and JWT Token <br>
+      But all movies's endpoints- require authentication and authorization<br>
+    </p>
     <table class="table table-bordered">
       <thead class="thead-dark">
         <tr>
@@ -30,7 +33,15 @@
       <tbody>
         <tr>
           <th scope="row">1</th>
-          <td>Get a list of all movies</td>
+          <td>User Login page</td>
+          <td>/login</td>
+          <td>POST</td>
+          <td>Authorization Key-value pair by username and password</td>
+          <td>Get a JWT token that isused to authorize a user as Bearer Token</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Get a list of all movies-Authorized by bearer token</td>
           <td>/movies</td>
           <td>GET</td>
           <td>None</td>
@@ -38,10 +49,10 @@
             about all the movies</td>
         </tr>
         <tr>
-          <th scope="row">2</th>
+          <th scope="row">3</th>
           <td>Get data about a
             single movie by
-            title</td>
+            title-Authorized by bearer token</td>
           <td>/movies/[title]</td>
           <td>GET</td>
           <td>None</td>
@@ -55,8 +66,8 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">3</th>
-          <td>Return genre by name</td>
+          <th scope="row">4</th>
+          <td>Return genre by name-Authorize by bearer token</td>
           <td>/movies/[genre]/[genreName]</td>
           <td>GET</td>
           <td>None</td>
@@ -70,8 +81,8 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">4</th>
-          <td>Get data about director by name</td>
+          <th scope="row">5</th>
+          <td>Get data about director by name-Authorize by bearer token</td>
           <td>/movies/[directors]/[directorName]</td>
           <td>GET</td>
           <td>None</td>
@@ -85,7 +96,7 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">5</th>
+          <th scope="row">6</th>
           <td>Add a new user</td>
           <td>/users</td>
           <td>POST</td>
@@ -114,7 +125,7 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">6</th>
+          <th scope="row">7</th>
           <td>update user name</td>
           <td>/users/[name]</td>
           <td>PUT</td>
@@ -137,16 +148,16 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">7</th>
-          <td>Add movie to favorites list of user</td>
+          <th scope="row">8</th>
+          <td>Add movie to favorites list of user-Authorize by bearer token</td>
           <td>[users]/[name]/[movies]/[MovieID]</td>
           <td>POST</td>
           <td>None</td>
           <td></td>
         </tr>
         <tr>
-          <th scope="row">8</th>
-          <td>Remove a movie from list of favourites</td>
+          <th scope="row">9</th>
+          <td>Remove a movie from list of favourites-Authorize by bearer token</td>
           <td>/users/[name]/[movies]/[movieID]</td>
           <td>DELETE</td>
           <td>None</td>
@@ -161,7 +172,7 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">9</th>
+          <th scope="row">10</th>
           <td>De-registering a user</td>
           <td>/users/id</td>
           <td>DELETE</td>
