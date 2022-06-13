@@ -1,0 +1,113 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "MyFlix Movie App",
+        "description": " Building a server-side component of a movies web application.",
+        "license": {
+            "name": "MyFlix",
+            "url": "https://myflix-movies-heroku.herokuapp.com/"
+        }
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Users",
+            "description": "operations about users"
+        },
+        {
+            "name": "Movies",
+            "description": "Everything about the movies"
+        }
+    ],
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "paths": {
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get all users",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Add a new user",
+                "consumes": "application/json",
+                "produces": "application/json",
+                "parameters": {
+                    "in": "body",
+                    "name": "body",
+                    "description": "user object needs to be added",
+                    "required": "true",
+                    "schema": "#definitions/User"
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Username and password is required"
+                    }
+                }
+            }
+        },
+        "/users/name": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user details with name",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "Schema": {
+                            "$ref": "definitions/User"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "required": [
+                "name",
+                "password",
+                "email"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "Users": {
+            "type": "array",
+            "$ref": "#/definitions/Users"
+        }
+    }
+}
