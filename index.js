@@ -28,6 +28,7 @@ app.use(cors({
   }
 }));
 
+
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./localPassport');
@@ -35,6 +36,9 @@ require('./localPassport');
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 app.use('/movies', MoviesRoutes);
 app.use('/users', UsersRoutes);
+
+const swaggerUi = require('swagger-ui-express'),
+  swaggerDocument = require('./swagger.json');
 
 app.get('/', (req, res, next) => {
   res.send("Welcome to myFlix Movie App!");
@@ -50,6 +54,9 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0', () => {
   console.log('Listening on Port ' + port);
