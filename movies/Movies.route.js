@@ -5,7 +5,7 @@ const Movie = require('./movie.model');
 const passport = require('passport');
 
 //read all movies
-router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/', (req, res) => {
     Movie.find()
         .then((movies) => {
             res.status(200).json(movies);
