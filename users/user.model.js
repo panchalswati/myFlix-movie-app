@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 let userSchema = mongoose.Schema({
-    name: { type: String, required: true },
-    password: { type: String, required: true },
-    email: { type: String, required: true },
+    Name: { type: String, required: true },
+    Password: { type: String, required: true },
+    Email: { type: String, required: true },
     Birthdate: Date,
-    favoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
+    FavouriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
 });
 
 userSchema.statics.hashPassword = (password) => {
