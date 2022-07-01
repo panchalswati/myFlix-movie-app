@@ -19,10 +19,10 @@ router.get('/', (req, res) => {
 
 //insert new user
 router.post('/', [
-    check('name', 'Username is required').isLength({ min: 5 }),
-    check('name', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-    check('password', 'Password is required').not().isEmpty(),
-    check('email', 'Email does not appear to be valid').isEmail()
+    check('Username', 'Username is required').isLength({ min: 5 }),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()
 ],
     (req, res) => {
         let errors = validationResult(req);  //check validation object for error
@@ -30,17 +30,17 @@ router.post('/', [
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }
-        let hashedPassword = User.hashPassword(req.body.password);    //hashed password
-        User.findOne({ name: req.body.name })
+        let hashedPassword = User.hashPassword(req.body.Password);    //hashed password
+        User.findOne({ Username: req.body.Username })
             .then((user) => {
                 if (user) {
-                    return res.status(400).send(req.body.name + ' already exists');
+                    return res.status(400).send(req.body.Username + ' already exists');
                 } else {
                     User
                         .create({
-                            name: req.body.name,
-                            password: hashedPassword,
-                            email: req.body.email,
+                            Username: req.body.Username,
+                            Password: hashedPassword,
+                            Email: req.body.Email,
                             Birthdate: req.body.Birthdate,
                         })
                         .then(user => { res.status(201).json(user) })
@@ -56,8 +56,8 @@ router.post('/', [
     })
 
 //read user by name
-router.get('/:name', (req, res) => {
-    User.findOne({ name: req.params.name })
+router.get('/:Username', (req, res) => {
+    User.findOne({ Username: req.params.Username })
         .then((user) => {
             res.json(user);
         })
@@ -68,11 +68,11 @@ router.get('/:name', (req, res) => {
 });
 
 //update user by name
-router.put('/:name', [
-    check('name', 'Username is required').isLength({ min: 5 }),
-    check('name', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-    check('password', 'Password is required').not().isEmpty(),
-    check('email', 'Email does not appear to be valid').isEmail()
+router.put('/:Username', [
+    check('Username', 'Username is required').isLength({ min: 5 }),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail(),
 ],
     (req, res) => {
         let errors = validationResult(req);  //check validation object for error
@@ -80,15 +80,15 @@ router.put('/:name', [
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }
-        let hashedPassword = User.hashPassword(req.body.password);
-        User.findOneAndUpdate({ name: req.params.name }, {
+        let hashedPassword = User.hashPassword(req.body.Password);
+        User.findOneAndUpdate({ Username: req.params.Username }, {
             $set:
             {
-                name: req.body.name,
-                password: hashedPassword,
-                email: req.body.email,
+                Username: req.body.Username,
+                Password: hashedPassword,
+                Email: req.body.Email,
                 Birthdate: req.body.Birthdate,
-                favoriteMovies: req.body.favoriteMovies
+                FavoriteMovies: req.body.FavoriteMovies
             }
         },
             { new: true },
@@ -103,9 +103,9 @@ router.put('/:name', [
     });
 
 //insert movie to user's favorite Movies list
-router.post('/:name/movies/:MovieID', (req, res) => {
-    User.findOneAndUpdate({ name: req.params.name }, {
-        $push: { favoriteMovies: req.params.MovieID }
+router.post('/:Username/movies/:MovieID', (req, res) => {
+    User.findOneAndUpdate({ Username: req.params.Username }, {
+        $push: { FavoriteMovies: req.params.MovieID }
     },
         { new: true },
         (err, updatedUser) => {
@@ -118,9 +118,9 @@ router.post('/:name/movies/:MovieID', (req, res) => {
         });
 });
 
-router.delete('/:name/movies/:MovieID', (req, res) => {
-    User.findOneAndUpdate({ name: req.params.name }, {
-        $pull: { favoriteMovies: req.params.MovieID }
+router.delete('/:Username/movies/:MovieID', (req, res) => {
+    User.findOneAndUpdate({ Username: req.params.Username }, {
+        $pull: { FavoriteMovies: req.params.MovieID }
     },
         { new: true },
         (err, updatedUser) => {
@@ -134,13 +134,13 @@ router.delete('/:name/movies/:MovieID', (req, res) => {
 });
 
 //delete - deregister user by name
-router.delete('/:name', (req, res) => {
-    User.findOneAndRemove({ name: req.params.name })
+router.delete('/:Username', (req, res) => {
+    User.findOneAndRemove({ Username: req.params.Username })
         .then((user) => {
             if (!user) {
-                res.status(400).send(req.params.name + ' was not found');
+                res.status(400).send(req.params.Username + ' was not found');
             } else {
-                res.status(200).send(req.params.name + ' was deleted.');
+                res.status(200).send(req.params.Username + ' was deleted.');
             }
         })
         .catch((err) => {
