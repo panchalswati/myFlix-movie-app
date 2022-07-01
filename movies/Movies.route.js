@@ -38,7 +38,7 @@ router.get('/genre/:genreName', (req, res) => {
 });
 //read director details by name
 router.get('/directors/:directorName', (req, res) => {
-    Movie.findOne({ 'Director.name': req.params.directorName })
+    Movie.findOne({ 'Director.Name': req.params.directorName })
         .then((movie) => {
             res.status(200).json(movie.Director);
         })
