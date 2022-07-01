@@ -7,11 +7,11 @@ const passport = require('passport'),
     ExtractJWT = passportJWT.ExtractJwt;
 
 passport.use(new LocalStrategy({
-    usernameField: 'name',
-    passwordField: 'password'
+    usernameField: 'Username',
+    passwordField: 'Password'
 }, (username, password, callback) => {
     console.log(username + '  ' + password);
-    User.findOne({ name: username }, (error, user) => {
+    User.findOne({ Username: username }, (error, user) => {
         if (error) {
             console.log(error);
             return callback(error);
