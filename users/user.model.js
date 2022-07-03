@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 let userSchema = mongoose.Schema({
-    Name: { type: String, required: true },
+    Username: { type: String, required: true },
     Password: { type: String, required: true },
     Email: { type: String, required: true },
-    Birthdate: Date,
+    Birthdate: { type: Number, required: true },
     FavouriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
 });
 
