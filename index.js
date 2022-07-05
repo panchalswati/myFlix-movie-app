@@ -12,11 +12,9 @@ app.use(morgan('dev'));
 const { check, validationResult } = require('express-validator');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 const cors = require('cors');
 //app.use(cors());
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', 'https://myflix-site.netlify.app'];
-
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', 'https://my-awesome-site123.netlify.app'];
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
@@ -31,21 +29,20 @@ app.use(cors({
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./localPassport');
-//mongoose.connect('mongodb+srv://myMovies:swati1dec@dbmyflix.53kbu.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 app.use('/movies', MoviesRoutes);
 app.use('/users', UsersRoutes);
-
 app.get('/', (req, res, next) => {
   res.send("Welcome to myFlix Movie App!");
   next();
 });
-//serving static file
+//serving static files
 //app.use(express.static('public'));
-app.get('docs', function (req, res) {
+app.get('/docs', function (req, res) {
   res.sendFile(path.join(__dirname + '/public/documentation.html'));
 })
-
+//error-handling middleware library
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
