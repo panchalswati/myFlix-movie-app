@@ -9,8 +9,8 @@ const passport = require('passport');
 //read all users
 router.get('/', (req, res) => {
     User.find()
-        .then((user) => {
-            res.status(200).json(user);
+        .then((users) => {
+            res.status(200).json(users);
         })
         .catch((error) => {
             res.status(500).send('Error' + error);
@@ -58,8 +58,8 @@ router.post('/', [
 //read user by name
 router.get('/:Username', (req, res) => {
     User.findOne({ Username: req.params.Username })
-        .then((user) => {
-            res.json(user);
+        .then((users) => {
+            res.json(users);
         })
         .catch((err) => {
             console.error(err);
@@ -88,7 +88,6 @@ router.put('/:Username', [
                 Password: hashedPassword,
                 Email: req.body.Email,
                 Birthdate: req.body.Birthdate,
-                FavoriteMovies: req.body.FavoriteMovies
             }
         },
             { new: true },
@@ -136,8 +135,8 @@ router.delete('/:Username/movies/:MovieID', (req, res) => {
 //delete - deregister user by name
 router.delete('/:Username', (req, res) => {
     User.findOneAndRemove({ Username: req.params.Username })
-        .then((user) => {
-            if (!user) {
+        .then((users) => {
+            if (!users) {
                 res.status(400).send(req.params.Username + ' was not found');
             } else {
                 res.status(200).send(req.params.Username + ' was deleted.');
