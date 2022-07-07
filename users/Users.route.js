@@ -19,7 +19,8 @@ router.get('/', (req, res) => {
 
 //insert new user
 router.post('/', [
-    check('Username', 'Username is required').isLength({ min: 5 }),
+    check('Username', 'Username must be greater than 4 letters').isLength({ min: 5 }),
+    check('Password', 'Username is required').not().isEmpty(),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail()

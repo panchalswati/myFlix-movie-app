@@ -14,7 +14,8 @@ userSchema.statics.hashPassword = (password) => {
 };
 
 userSchema.methods.validatePassword = function (password) {
-    return bcrypt.compareSync(password, this.password);
+    console.log(password, this.Password, "validatePassword")
+    return bcrypt.compareSync(password, this.Password);
 };
 
 module.exports = mongoose.model('User', userSchema);
