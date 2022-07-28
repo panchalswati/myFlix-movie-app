@@ -105,7 +105,7 @@ router.put('/:Username', [
 //insert movie to user's favorite Movies list
 router.post('/:Username/movies/:MovieID', (req, res) => {
     User.findOneAndUpdate({ Username: req.params.Username }, {
-        $push: { FavoriteMovies: req.params.MovieID }
+        $push: { FavouriteMovies: req.params.MovieID }
     },
         { new: true },
         (err, updatedUser) => {
@@ -120,7 +120,7 @@ router.post('/:Username/movies/:MovieID', (req, res) => {
 
 router.delete('/:Username/movies/:MovieID', (req, res) => {
     User.findOneAndUpdate({ Username: req.params.Username }, {
-        $pull: { FavoriteMovies: req.params.MovieID }
+        $pull: { FavouriteMovies: req.params.MovieID }
     },
         { new: true },
         (err, updatedUser) => {
