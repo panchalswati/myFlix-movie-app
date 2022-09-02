@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const cors = require('cors');
 //app.use(cors());
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', 'https://my-awesome-site123.netlify.app', 'http://localhost:4200'];
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', 'https://my-awesome-site123.netlify.app', 'http://localhost:4200', 'https://panchalswati.github.io/'];
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
