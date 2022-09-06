@@ -1,3 +1,6 @@
+/**
+ * Extracting JWT token for user
+ */
 const passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     User = require('./users/user.model.js'),
@@ -6,6 +9,9 @@ const passport = require('passport'),
     JWTStrategy = passportJWT.Strategy,
     ExtractJWT = passportJWT.ExtractJwt;
 
+/**
+ * get username,password of logged-in user
+ */
 passport.use(new LocalStrategy({
     usernameField: 'Username',
     passwordField: 'Password'
@@ -32,6 +38,9 @@ passport.use(new LocalStrategy({
     });
 }));
 
+/**
+ * get JWT token for logged-in user
+ */
 passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: 'your_jwt_secret'

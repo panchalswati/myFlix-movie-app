@@ -6,7 +6,9 @@ const { check, validationResult } = require('express-validator');
 const User = require('./user.model');
 const passport = require('passport');
 
-//read all users
+/**
+ * api to get all users 
+ */
 router.get('/', (req, res) => {
     User.find()
         .then((users) => {
@@ -17,7 +19,9 @@ router.get('/', (req, res) => {
         })
 })
 
-//insert new user
+/**
+ * @returns insert new user details in database
+ */
 router.post('/', [
     check('Username', 'Username must be greater than 4 letters').isLength({ min: 5 }),
     check('Password', 'Username is required').not().isEmpty(),
@@ -56,7 +60,9 @@ router.post('/', [
             })
     })
 
-//read user by name
+/**
+ * api to get user details by username
+ */
 router.get('/:Username', (req, res) => {
     User.findOne({ Username: req.params.Username })
         .then((users) => {
@@ -68,7 +74,9 @@ router.get('/:Username', (req, res) => {
         });
 });
 
-//update user by name
+/**
+ * api to update user details by name
+ */
 router.put('/:Username', [
     check('Username', 'Username is required').isLength({ min: 5 }),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
@@ -102,7 +110,10 @@ router.put('/:Username', [
             });
     });
 
-//insert movie to user's favorite Movies list
+/**
+ * api to insert movie to user's favorite Movies list
+ */
+
 router.post('/:Username/movies/:MovieID', (req, res) => {
     User.findOneAndUpdate({ Username: req.params.Username }, {
         $push: { FavouriteMovies: req.params.MovieID }
@@ -118,6 +129,9 @@ router.post('/:Username/movies/:MovieID', (req, res) => {
         });
 });
 
+/**
+ * api to delete movie from user favourite movies list
+ */
 router.delete('/:Username/movies/:MovieID', (req, res) => {
     User.findOneAndUpdate({ Username: req.params.Username }, {
         $pull: { FavouriteMovies: req.params.MovieID }
@@ -133,7 +147,9 @@ router.delete('/:Username/movies/:MovieID', (req, res) => {
         });
 });
 
-//delete - deregister user by name
+/**
+ * api to delete user 
+ */
 router.delete('/:Username', (req, res) => {
     User.findOneAndRemove({ Username: req.params.Username })
         .then((users) => {

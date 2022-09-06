@@ -1,4 +1,8 @@
 const mongoose = require('mongoose');
+
+/**
+ * creating mongoose movie schema 
+ */
 let movieSchema = mongoose.Schema({
     Title: { type: String, required: true },
     Description: { type: String, required: true },
@@ -15,4 +19,7 @@ let movieSchema = mongoose.Schema({
     ImagePath: String,
     Feature: Boolean
 });
+/**
+ * exports the movie schema to Movie component
+ */
 module.exports = mongoose.model('Movie', movieSchema)
