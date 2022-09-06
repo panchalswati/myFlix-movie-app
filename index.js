@@ -29,6 +29,10 @@ app.use(cors({
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./localPassport');
+
+/**
+ * connect to mongoose database
+ */
 //mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 app.use('/movies', MoviesRoutes);
@@ -37,17 +41,27 @@ app.get('/', (req, res, next) => {
   res.send("Welcome to myFlix Movie App!");
   next();
 });
-//serving static files
-//app.use(express.static('public'));
+
+/**
+ *serving static files
+  app.use(express.static('public')); 
+ */
 app.get('/docs', function (req, res) {
   res.sendFile(path.join(__dirname + '/public/documentation.html'));
 })
-//error-handling middleware library
+
+/**
+ * error-handling middleware library
+ */
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
 const port = process.env.PORT || 8080;
+
+/**
+ * listening on port 8080
+ */
 app.listen(port, '0.0.0.0', () => {
   console.log('Listening on Port ' + port);
 });
