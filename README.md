@@ -25,6 +25,8 @@ Technical Requirements
 ● The API must be a Node.js and Express application.
 ● The API must use REST architecture, with URL endpoints corresponding to the data operations listed above
 ● The API must use at least three middleware modules, such as the body-parser package for reading data from requests and morgan for logging.
+● The database must be built using MongoDB and the business logic must be modeled with Mongoose.
+
 
 Hosted the App in Heroku
 The Heroku Link : https://myflix-movies-heroku.herokuapp.com/
