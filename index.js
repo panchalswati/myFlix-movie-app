@@ -1,3 +1,19 @@
+/**
+ * @file The index file creates the Express application, sets up the server and implements routes to Api
+ * endpoints used to access myFlix data. Requests made to these endpoints use mongoose models created in the
+ * models file and are authenticated using strategies implemented in the passport file. The connect method
+ * establishes a connection between mongoose and the database, which is hosted on MongoDB Atlas. The
+ * server and endpoints are hosted on Heroku.
+ * @requires mongoose Connects the app to the database and implements data schemas using models.
+ * @requires './users' The file where data schemas and models are defined.
+ * * @requires './movies' The file where data schemas and models are defined.
+ * @requires express Used to create an express application.
+ * @requires morgan Used to log requests made to the database.
+ * @requires passport Used to create strategies for authenticating and authorising requests to the Api endpoints.
+ * @requires './auth.js' The file that implements the user login route.
+ * @requires cors Used to control origins from which requests to the server can be made.
+ * @requires express-validator Used to perform validation on data provided when creating or updating a user.
+ */
 const express = require('express'),
   app = express(),
   path = require('path'),
